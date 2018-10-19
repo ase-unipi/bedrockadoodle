@@ -3,8 +3,8 @@ python: 3.6
 env:
  - TOX_ENV=py36
 install:
- - pip install tox
+ - pip install - requirements.txt
 script:
- - tox -e $TOX_ENV
+ - pytest
 
 
