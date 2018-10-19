@@ -1,7 +1,5 @@
 language: python
 python: 3.6
-env:
- - TOX_ENV=py36
 install:
  - pip install - requirements.txt
 script:
