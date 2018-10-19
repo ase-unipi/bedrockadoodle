@@ -2,4 +2,4 @@
 
 # bedrockadoodle
 
-A toy doodle.
+A toy doodle microservice.
