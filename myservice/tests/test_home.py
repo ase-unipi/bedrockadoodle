@@ -364,5 +364,52 @@ class TestApp(unittest.TestCase):
                                 "message": "410 Gone: The requested URL is no longer available on this server and there is no forwarding address. If you followed a link from a foreign page, please contact the author of this page."
                             })
 
+
+    def test4(self): #allpolls
+        app = tested_app.test_client()
+
+        #create a doodle 4
+        reply = app.post('/doodles', 
+                         data=json.dumps({"title" : "poll1", 
+                                          "options" : ["1", "2", "3"]
+                                          }), 
+                         content_type='application/json')
+
+        body = json.loads(str(reply.data, 'utf8'))
+
+        self.assertEqual(body['pollnumber'], 4)
+
+        #create a doodle 5
+        reply = app.post('/doodles', 
+                         data=json.dumps({"title" : "poll1", 
+                                          "options" : ["1", "2", "3"]
+                                          }), 
+                         content_type='application/json')
+
+        body = json.loads(str(reply.data, 'utf8'))
+
+        self.assertEqual(body['pollnumber'], 5)
+
+        # delete the doodle 
+        reply = app.delete('/doodles/5')
+        body = json.loads(str(reply.data, 'utf8'))
+
+        # delete the doodle 
+        reply = app.delete('/doodles/4')
+        body = json.loads(str(reply.data, 'utf8'))
+
+        #create a doodle
+        reply = app.post('/doodles', 
+                         data=json.dumps({"title" : "poll1", 
+                                          "options" : ["1", "2", "3"]
+                                          }), 
+                         content_type='application/json')
+
+        body = json.loads(str(reply.data, 'utf8'))
+        #check ID is only increasing
+        self.assertEqual(body['pollnumber'], 6)
         
+        
+
+
 
